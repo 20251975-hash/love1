@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>연애상담 챗봇</title>
+<style>
+body{margin:0;background:#b2c7da;font-family:Malgun Gothic;display:flex;justify-content:center;align-items:center;height:100vh}
+.chat{width:420px;height:700px;background:#fff;border-radius:20px;display:flex;flex-direction:column;overflow:hidden}
+.header{background:#FEE500;padding:18px;text-align:center;font-size:22px;font-weight:bold}
+#chat{flex:1;overflow:auto;padding:20px;background:#abc1d1}
+.bot,.user{padding:12px;border-radius:15px;margin:10px 0;max-width:70%}
+.bot{background:#fff} .user{background:#FEE500;margin-left:auto}
+.bottom{display:flex;padding:10px;gap:5px} input{flex:1;padding:10px} button{padding:10px;background:#FEE500;border:none}
+</style></head><body>
+<div class="chat"><div class="header">💕 연애상담 챗봇</div>
+<div id="chat"><div class="bot">안녕하세요 😊 질문을 입력하세요.</div></div>
+<div class="bottom"><input id="q"><button onclick="send()">전송</button></div></div>
+<script>
+const chatbot=[
+{question:'남자친구가 연락이 없어요',answer:'상대방도 개인 시간이 필요할 수 있어요. 조금 기다려 보세요.'},
+{question:'고백해도 될까요?',answer:'진심을 담아 고백해 보세요.'},
+{question:'헤어졌어요',answer:'힘든 시간이지만 자신을 먼저 돌보는 것이 중요합니다.'},
+{question:'짝사랑이 힘들어요',answer:'자신의 감정을 소중히 여기고 너무 자신을 탓하지 마세요.'},
+{question:'썸이 식은 것 같아요',answer:'자연스럽게 대화를 이어가며 상대의 마음을 확인해 보세요.'}
+];
+const chat=document.getElementById('chat');
+function add(c,t){let d=document.createElement('div');d.className=c;d.innerHTML=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
+function send(){let i=document.getElementById('q');let q=i.value.trim();if(!q)return;add('user',q);i.value='';let ans='죄송해요. 아직 답변을 찾지 못했어요.';for(const x of chatbot){if(q.includes(x.question)){ans=x.answer;break;}}setTimeout(()=>add('bot',ans),300);}
+document.getElementById('q').addEventListener('keypress',e=>{if(e.key==='Enter')send();});
+</script></body></html>
